@@ -10,14 +10,10 @@ const LocationSchema = new mongoose.Schema(
         lat: {
             type: Number,
             required: true,
-            min: -90,
-            max: 90
         },
         long: {
             type: Number,
             required: true,
-            min: -90,
-            max: 90
         }
     },
 );
