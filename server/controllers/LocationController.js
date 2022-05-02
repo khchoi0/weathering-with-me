@@ -33,6 +33,7 @@ exports.createLoc = async (req, res) => {
 
 /**
  * Read all locations
+ * 
  * @param {import('express').Request} req 
  * @param {import('express').Response} res 
  * @returns 
@@ -70,11 +71,14 @@ exports.updateLoc = async (req, res) => {
             return res.status(404).json({ message: 'The location does not existed' });
         }
 
-        loc.lname = req.body.newLname;
-        let newloc = await Location.findOne({ lname: req.body.oldLname }, 'lname lat long');
-        if (newloc !== null) {
-            return res.status(404).json({ message: 'The location name is existed. Please rename the location.' });
+        if (req.body.oldLname !== req.body.newLname) { // check newLname is occupied
+            let newloc = await Location.findOne({ lname: req.body.newLname }, 'lname lat long');
+            if (newloc !== null) {
+                return res.status(404).json({ message: 'The location name is occupied. Please rename the location.' });
+            }
         }
+
+        loc.lname = req.body.newLname;
         loc.lat = req.body.lat;
         loc.long = req.body.long;
         loc.save();
@@ -87,6 +91,7 @@ exports.updateLoc = async (req, res) => {
 
 /**
  * Delete a location
+ * 
  * @typedef requestBody
  * @property {String} lname
  * 
