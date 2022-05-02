@@ -42,7 +42,7 @@ exports.readLoc = async (req, res) => {
     try {
         const loc = await Location.find();
         if (loc === []) {
-            return res.status(404).json({ message: 'No locations in database.' });
+            return res.status(404).json({ message: 'No locations in database' });
         }
 
         res.status(200).json(loc);
@@ -74,7 +74,7 @@ exports.updateLoc = async (req, res) => {
         if (req.body.oldLname !== req.body.newLname) { // check newLname is occupied
             let newloc = await Location.findOne({ lname: req.body.newLname }, 'lname lat long');
             if (newloc !== null) {
-                return res.status(404).json({ message: 'The location name is occupied. Please rename the location.' });
+                return res.status(405).json({ message: 'The location name is occupied' });
             }
         }
 
