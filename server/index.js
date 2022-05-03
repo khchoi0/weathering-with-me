@@ -21,16 +21,15 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 // Import routes
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/AuthRoute');
 const locRoutes = require('./routes/LocationRoute');
 
 // Use routes
 app.use(PREFIX, authRoutes);
 app.use(PREFIX, locRoutes);
-
 
 app.listen(8000, async () => {
 	console.log(`Server is running on ${PORT}`);
