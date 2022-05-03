@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const User = require('../models/user-model');
 const bcrypt = require('bcrypt');
 
 // Register
@@ -45,3 +45,25 @@ exports.login = async (req, res) => {
 		return res.status(500).json(error);
 	}
 };
+
+/**
+ * Read all users
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+exports.userRead = asyn (req, res) = {
+	
+}
+
+
+/**
+ * 
+ * 
+ * @param {import('express').Request} req 
+ * @param {import('express').Response} res 
+ */
+
+// update 
+exports.userUpdate = async (req, res) => {
+}

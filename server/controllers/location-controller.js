@@ -1,4 +1,4 @@
-const Location = require('../models/LocationModel')
+const Location = require('../models/location-model')
 
 /**
  * Create a location

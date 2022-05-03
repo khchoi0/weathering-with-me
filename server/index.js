@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 
 // Import routes
 const authRoutes = require('./routes/auth');
-const locRoutes = require('./routes/LocationRoute');
+const locRoutes = require('./routes/location-route');
 
 // Use routes
 app.use(PREFIX, authRoutes);
