@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Alert } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useContext, useRef, useState } from 'react';
 import { loginCall } from '../../../api/auth';
@@ -56,10 +57,13 @@ export const Login = () => {
 				<Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
 					<LockOutlinedIcon />
 				</Avatar>
-				<Typography component='h1' variant='h5'>
+				<Typography component='h1' variant='h5' color='primary.main'>
 					Sign in
 				</Typography>
 				<Box component='form' sx={{ mt: 1 }} onSubmit={handleSubmit(handleClick)}>
+					{validationFail ? (
+						<Alert severity='error'>Username or password is incorrect</Alert>
+					) : null}
 					<TextField
 						margin='normal'
 						fullWidth
@@ -85,11 +89,6 @@ export const Login = () => {
 						error={!!errors?.password}
 						helperText={errors?.password ? errors.password.message : null}
 					/>
-					{validationFail ? (
-						<Typography align='center' variant='body2' color='error'>
-							Username or password is incorrect
-						</Typography>
-					) : null}
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
 						Sign In
 					</Button>
