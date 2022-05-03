@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { Alert } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { useRef, useContext, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
@@ -58,7 +59,7 @@ export const Register = () => {
 				<Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
 					<LockOutlinedIcon />
 				</Avatar>
-				<Typography component='h1' variant='h5'>
+				<Typography component='h1' variant='h5' color='primary.main'>
 					Sign up
 				</Typography>
 				<Box
@@ -67,6 +68,7 @@ export const Register = () => {
 					sx={{ mt: 1 }}
 					onSubmit={handleSubmit(handleClick)}
 				>
+					{userExist ? <Alert severity='error'>User already exists</Alert> : null}
 					<TextField
 						margin='normal'
 						fullWidth
@@ -117,15 +119,9 @@ export const Register = () => {
 						error={!!errors?.conPassword}
 						helperText={errors?.conPassword ? errors.conPassword.message : null}
 					/>
-					{userExist ? (
-						<Typography align='center' variant='body2' color='error'>
-							User already exists
-						</Typography>
-					) : null}
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
 						Sign up
 					</Button>
-
 					<Grid container alignItems='center' justifyContent='center'>
 						<Grid item>
 							<Link variant='body2' component={RouterLink} to='/login'>
