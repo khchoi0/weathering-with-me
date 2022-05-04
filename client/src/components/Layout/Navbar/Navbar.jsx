@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import { Link as RouterLink } from 'react-router-dom';
+import WeatherIcon from '../../../assets/images/weather-icon.png';
 
 export const Navbar = () => {
 	const [anchorElNav, setAnchorElNav] = useState(null);
@@ -37,6 +38,7 @@ export const Navbar = () => {
 		setAnchorElUser(null);
 	};
 
+	// Clear user token
 	const handleLogout = () => {
 		window.localStorage.removeItem('weatherapp_user');
 		window.location.reload();
@@ -50,14 +52,18 @@ export const Navbar = () => {
 		<AppBar position='static'>
 			<Container maxWidth='xl'>
 				<Toolbar disableGutters>
-					<Typography
-						variant='h6'
-						noWrap
-						component='div'
-						sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-					>
-						LOGO
-					</Typography>
+					<RouterLink to='/'>
+						<Box
+							component='img'
+							alt='WEATHERING'
+							src={WeatherIcon}
+							sx={{
+								height: 55,
+								width: 55,
+								display: { xs: 'none', md: 'block' },
+							}}
+						/>
+					</RouterLink>
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
 						<IconButton
 							size='large'
@@ -94,29 +100,33 @@ export const Navbar = () => {
 							)}
 						</Menu>
 					</Box>
-					<Typography
-						variant='h6'
-						noWrap
-						component='div'
-						sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-					>
-						LOGO
-					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 						{user.isAdmin && (
 							<Button
 								component={RouterLink}
 								to='/cms'
-								sx={{ my: 2, color: 'white', display: 'block' }}
+								sx={{
+									my: 2,
+									color: 'white',
+									display: 'block',
+									'&:hover': { color: 'tertiary.dark' },
+								}}
 							>
 								ADMIN PAGE
 							</Button>
 						)}
 					</Box>
-
 					<Box sx={{ flexGrow: 0 }}>
-						<Tooltip title='Open settings'>
-							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} color='inherit'>
+						<Tooltip title='View User Settings'>
+							<IconButton
+								onClick={handleOpenUserMenu}
+								sx={{
+									padding: '3px',
+									borderRadius: '11%',
+									'&:hover': { color: 'tertiary.dark' },
+								}}
+								color='inherit'
+							>
 								{user.username}
 								<AccountCircle sx={{ width: '48px', height: '48px' }} />
 							</IconButton>

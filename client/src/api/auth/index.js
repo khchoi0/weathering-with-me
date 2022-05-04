@@ -16,6 +16,7 @@ export const loginCall = async (userInfo, dispatch, isError = false) => {
 	} catch (error) {
 		dispatch({ type: 'LOGIN_FAILURE', payload: error });
 		console.log(error);
+		throw error;
 	}
 };
 
@@ -35,5 +36,6 @@ export const registerCall = async (userInfo, dispatch, isError = false) => {
 	} catch (error) {
 		dispatch({ type: 'REGISTER_FAILURE', payload: error });
 		console.log(error);
+		throw error;
 	}
 };
