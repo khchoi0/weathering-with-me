@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Import routes
-const authRoutes = require('./routes/AuthRoute');
-const locRoutes = require('./routes/LocationRoute');
+const authRoutes = require('./routes/auth-route');
+const locRoutes = require('./routes/location-route');
 
 // Use routes
 app.use(PREFIX, authRoutes);
