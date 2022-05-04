@@ -12,7 +12,7 @@ const Location = require('../models/location-model')
  * @param {import('express').Response} res    
  * @returns 
  */
-exports.createLoc = async (req, res) => {
+exports.locCreate = async (req, res) => {
     try {
         const loc = new Location({
             lname: req.body.lname,
@@ -38,7 +38,7 @@ exports.createLoc = async (req, res) => {
  * @param {import('express').Response} res 
  * @returns 
  */
-exports.readLoc = async (req, res) => {
+exports.locRead = async (req, res) => {
     try {
         const loc = await Location.find();
         if (loc === []) {
@@ -64,7 +64,7 @@ exports.readLoc = async (req, res) => {
  * @param {import('express').Response} res 
  * @returns 
  */
-exports.updateLoc = async (req, res) => {
+exports.locUpdate = async (req, res) => {
     try {
         let loc = await Location.findOne({ lname: req.body.oldLname }, 'lname lat long');
         if (loc === null) {
@@ -99,7 +99,7 @@ exports.updateLoc = async (req, res) => {
  * @param {response} res 
  * @returns 
  */
-exports.deleteLoc = async (req, res) => {
+exports.locDelete = async (req, res) => {
     try {
         let loc = await Location.deleteOne({ lname: req.body.lname });
         if (loc.deletedCount === 0) {

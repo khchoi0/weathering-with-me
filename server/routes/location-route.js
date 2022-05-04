@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const { createLoc, readLoc, updateLoc, deleteLoc } = require('../controllers/location-controller');
+const { locCreate, locRead, locUpdate, locDelete } = require('../controllers/location-controller');
 
-router.post('/loc/create', createLoc);
+router.post('/loc/create', locCreate);
 
-router.get('/loc/read', readLoc);
+router.get('/loc/read', locRead);
 
-router.put('/loc/update', updateLoc);
+router.put('/loc/update', locUpdate);
 
-router.delete('/loc/delete', deleteLoc);
+router.delete('/loc/delete', locDelete);
 
 module.exports = router;
