@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material';
 
+// Used for Material UI component color
 export const theme = createTheme({
 	palette: {
 		primary: {
@@ -16,12 +17,15 @@ export const theme = createTheme({
 		tertiary: {
 			main: '#E5CB9F',
 			light: '#e7d2ac',
-			dark: '#ddc08d',
+			dark: '#e2ab4d',
 		},
 		quaternary: {
 			main: '#EEE4AB',
 			light: '#eee5b8',
-			dark: '#e0d389',
+			dark: '#dbcd7c',
+		},
+		quinary: {
+			main: '#F55353',
 		},
 		otherColor: {
 			main: '#FFFFFF',
