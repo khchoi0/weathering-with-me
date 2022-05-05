@@ -44,10 +44,6 @@ export const Navbar = () => {
 		window.location.reload();
 	};
 
-	console.log('Is Admin? ', user.isAdmin);
-	console.log('Username: ', user.username);
-	console.log('Unique Id: ', user._id);
-
 	return (
 		<AppBar position='static'>
 			<Container maxWidth='xl'>

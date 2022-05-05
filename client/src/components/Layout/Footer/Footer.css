@@ -1,6 +1,6 @@
 footer {
-	background-color: #5c5d5e;
-	color: #ffffff;
+	background-color: var(--otherColor-grey);
+	color: var(--otherColor-white);
 	height: 80px;
 	display: flex;
 	align-items: center;
