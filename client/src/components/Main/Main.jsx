@@ -5,7 +5,18 @@ import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { MAPBOX } from '../../config/Config';
 import { Room } from '@mui/icons-material';
 import { getAllLocations, getWeatherDataByLocname } from '../../api/location';
+import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import Button from '@mui/material/Button';
 
 export const Main = () => {
 	const [locationData, setLocationData] = useState([]);
@@ -20,6 +31,8 @@ export const Main = () => {
 	const [weatherIcon, setWeatherIcon] = useState(null);
 	const [weatherText, setWeatherText] = useState(null);
 	const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
+	const [searchValue, setSearchValue] = useState('');
+	const [searchResult, setSearchResult] = useState([]);
 
 	// The initial location is Hong Kong
 	const [viewport, setViewport] = useState({
@@ -51,10 +64,27 @@ export const Main = () => {
 		setLastUpdatedTime(weatherData.data.current.last_updated);
 	};
 
+	// Table search
+	const searchFilterTable = (e) => {
+		if (e.target.value !== '') {
+			setSearchValue(e.target.value);
+			const filteredTable = locationData.filter((o) =>
+				Object.keys(o).some((k) =>
+					String(o[k]).toLowerCase().includes(e.target.value.toLowerCase()),
+				),
+			);
+			setSearchResult([...filteredTable]);
+		} else {
+			setSearchValue(e.target.value);
+			locationData([...locationData]);
+		}
+	};
+
 	// Initialize
 	const init = async () => {
 		try {
 			const locations = await getAllLocations();
+			console.log(locations.data);
 			setLocationData(locations.data);
 		} catch (error) {
 			if (error.response) {
@@ -70,8 +100,8 @@ export const Main = () => {
 
 	return (
 		<Layout>
-			<Grid container spacing={2}>
-				<Grid item md={8} xs={12} sm={12}>
+			<Grid container spacing={1}>
+				<Grid item md={8} sm={12} xs={12}>
 					{/* Mapbox */}
 					<ReactMapGL
 						{...viewport}
@@ -80,7 +110,7 @@ export const Main = () => {
 						mapStyle='mapbox://styles/safak/cknndpyfq268f17p53nmpwira'
 					>
 						{locationData.map((locationItem) => (
-							<div key={locationItem._id}>
+							<Box component='div' key={locationItem._id}>
 								<Marker
 									latitude={locationItem.lat}
 									longitude={locationItem.long}
@@ -109,35 +139,138 @@ export const Main = () => {
 										anchor='left'
 										onClose={() => setCurrentLocId(null)}
 									>
-										<div className='popup-container'>
-											<div className='popup-title-container'>
-												<h4 className='popup-title'>{locationName}</h4>
-												<img src={weatherIcon} alt={weatherText} />
-											</div>
-											<label className='popup-label'>Temperature</label>
-											<p className='popup-desc'>{temperature}&#8451;</p>
-											<label className='popup-label'>Wind Speed</label>
-											<p className='popup-desc'>{windSpeed} km/h</p>
-											<label className='popup-label'>Wind direction</label>
-											<p className='popup-desc'>{windDirection}</p>
-											<label className='popup-label'>Humidity</label>
-											<p className='popup-desc'>{humidity}%</p>
-											<label className='popup-label'>Precipitation</label>
-											<p className='popup-desc'>{precipitation}%</p>
-											<label className='popup-label'>Visibility</label>
-											<p className='popup-desc'>{visibility}km</p>
-											<p className='popup-time'>Last Updated Time: {lastUpdatedTime}</p>
-										</div>
+										<Box component='div' className='popup-container'>
+											<Box component='div' className='popup-title-container'>
+												<Typography variant='h5' className='popup-title'>
+													{locationName}
+												</Typography>
+												<Box component='img' src={weatherIcon} alt={weatherText} />
+											</Box>
+											<Box component='label' className='popup-label'>
+												Temperature
+											</Box>
+											<Typography variant='p' className='popup-desc'>
+												{temperature}&#8451;
+											</Typography>
+											<Box component='label' className='popup-label'>
+												Wind Speed
+											</Box>
+											<Typography variant='p' className='popup-desc'>
+												{windSpeed} km/h
+											</Typography>
+											<Box component='label' className='popup-label'>
+												Wind direction
+											</Box>
+											<Typography variant='p' className='popup-desc'>
+												{windDirection}
+											</Typography>
+											<Box component='label' className='popup-label'>
+												Humidity
+											</Box>
+											<Typography variant='p' className='popup-desc'>
+												{humidity}%
+											</Typography>
+											<Box component='label' className='popup-label'>
+												Precipitation
+											</Box>
+											<Typography variant='p' className='popup-desc'>
+												{precipitation}%
+											</Typography>
+											<Box component='label' className='popup-label'>
+												Visibility
+											</Box>
+											<Typography variant='p' className='popup-desc'>
+												{visibility}km
+											</Typography>
+											<Typography variant='p' className='popup-time' sx={{ pt: 1 }}>
+												Last Updated Time: {lastUpdatedTime}
+											</Typography>
+										</Box>
 									</Popup>
 								)}
-							</div>
+							</Box>
 						))}
 					</ReactMapGL>
 				</Grid>
-				<Grid item md={4} xs={12} sm={12}>
-					<div style={{ backgroundColor: 'red' }}>
-						<h1>Right</h1>
-					</div>
+				<Grid item md={4} sm={12} xs={12}>
+					<Box component='div' sx={{ pr: 1, pt: 1, height: '100vh', overflow: 'scroll' }}>
+						<InputBase
+							className='searchInput'
+							type='text'
+							placeholder='Search location...'
+							value={searchValue}
+							onChange={searchFilterTable}
+						/>
+						<TableContainer component={Paper}>
+							<Table sx={{ minWidth: 560 }} aria-label='simple table'>
+								<TableHead>
+									<TableRow>
+										<TableCell>#</TableCell>
+										<TableCell align='right'>LocName</TableCell>
+										<TableCell align='right'>Add To Fav</TableCell>
+										<TableCell align='right'>Search</TableCell>
+									</TableRow>
+								</TableHead>
+								<TableBody>
+									{searchValue.length > 0
+										? searchResult.map((location, index) => (
+												<TableRow
+													key={location._id}
+													sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+												>
+													<TableCell component='th' scope='row'>
+														{index + 1}
+													</TableCell>
+													<TableCell align='right'>{location.lname}</TableCell>
+													<TableCell align='right'>Add</TableCell>
+													<TableCell align='right'>
+														<Button
+															variant='outlined'
+															onClick={() =>
+																handleMarker(
+																	location._id,
+																	location.lat,
+																	location.long,
+																	location.lname,
+																)
+															}
+														>
+															Search
+														</Button>
+													</TableCell>
+												</TableRow>
+										  ))
+										: locationData.map((location, index) => (
+												<TableRow
+													key={location._id}
+													sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+												>
+													<TableCell component='th' scope='row'>
+														{index + 1}
+													</TableCell>
+													<TableCell align='right'>{location.lname}</TableCell>
+													<TableCell align='right'>Add</TableCell>
+													<TableCell align='right'>
+														<Button
+															variant='outlined'
+															onClick={() =>
+																handleMarker(
+																	location._id,
+																	location.lat,
+																	location.long,
+																	location.lname,
+																)
+															}
+														>
+															Search
+														</Button>
+													</TableCell>
+												</TableRow>
+										  ))}
+								</TableBody>
+							</Table>
+						</TableContainer>
+					</Box>
 				</Grid>
 			</Grid>
 		</Layout>
