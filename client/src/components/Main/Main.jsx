@@ -33,6 +33,7 @@ export const Main = () => {
 	const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
 	const [searchValue, setSearchValue] = useState('');
 	const [searchResult, setSearchResult] = useState([]);
+	const [showComment, setShowComment] = useState(false);
 
 	// The initial location is Hong Kong
 	const [viewport, setViewport] = useState({
@@ -62,6 +63,14 @@ export const Main = () => {
 		setWeatherIcon(weatherData.data.current.condition.icon);
 		setWeatherText(weatherData.data.current.condition.text);
 		setLastUpdatedTime(weatherData.data.current.last_updated);
+		// Show comment trigger
+		setShowComment(true);
+	};
+
+	// Close the popup and show the table again
+	const handlePopupClose = () => {
+		setCurrentLocId(null);
+		setShowComment(false);
 	};
 
 	// Table search
@@ -137,7 +146,7 @@ export const Main = () => {
 										closeButton={true}
 										closeOnClick={false}
 										anchor='left'
-										onClose={() => setCurrentLocId(null)}
+										onClose={handlePopupClose}
 									>
 										<Box component='div' className='popup-container'>
 											<Box component='div' className='popup-title-container'>
@@ -194,82 +203,88 @@ export const Main = () => {
 				</Grid>
 				<Grid item md={4} sm={12} xs={12}>
 					<Box component='div' sx={{ pr: 1, pt: 1, height: '100vh', overflow: 'scroll' }}>
-						<InputBase
-							className='searchInput'
-							type='text'
-							placeholder='Search location...'
-							value={searchValue}
-							onChange={searchFilterTable}
-						/>
-						<TableContainer component={Paper}>
-							<Table sx={{ minWidth: 560 }} aria-label='simple table'>
-								<TableHead>
-									<TableRow>
-										<TableCell>#</TableCell>
-										<TableCell align='right'>LocName</TableCell>
-										<TableCell align='right'>Add To Fav</TableCell>
-										<TableCell align='right'>Search</TableCell>
-									</TableRow>
-								</TableHead>
-								<TableBody>
-									{searchValue.length > 0
-										? searchResult.map((location, index) => (
-												<TableRow
-													key={location._id}
-													sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-												>
-													<TableCell component='th' scope='row'>
-														{index + 1}
-													</TableCell>
-													<TableCell align='right'>{location.lname}</TableCell>
-													<TableCell align='right'>Add</TableCell>
-													<TableCell align='right'>
-														<Button
-															variant='outlined'
-															onClick={() =>
-																handleMarker(
-																	location._id,
-																	location.lat,
-																	location.long,
-																	location.lname,
-																)
-															}
+						{showComment ? (
+							<h1>Comment</h1>
+						) : (
+							<Box component='div'>
+								<InputBase
+									className='searchInput'
+									type='text'
+									placeholder='Search location...'
+									value={searchValue}
+									onChange={searchFilterTable}
+								/>
+								<TableContainer component={Paper}>
+									<Table sx={{ minWidth: 560 }} aria-label='simple table'>
+										<TableHead>
+											<TableRow>
+												<TableCell>#</TableCell>
+												<TableCell align='right'>LocName</TableCell>
+												<TableCell align='right'>Add To Fav</TableCell>
+												<TableCell align='right'>Search</TableCell>
+											</TableRow>
+										</TableHead>
+										<TableBody>
+											{searchValue.length > 0
+												? searchResult.map((location, index) => (
+														<TableRow
+															key={location._id}
+															sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 														>
-															Search
-														</Button>
-													</TableCell>
-												</TableRow>
-										  ))
-										: locationData.map((location, index) => (
-												<TableRow
-													key={location._id}
-													sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-												>
-													<TableCell component='th' scope='row'>
-														{index + 1}
-													</TableCell>
-													<TableCell align='right'>{location.lname}</TableCell>
-													<TableCell align='right'>Add</TableCell>
-													<TableCell align='right'>
-														<Button
-															variant='outlined'
-															onClick={() =>
-																handleMarker(
-																	location._id,
-																	location.lat,
-																	location.long,
-																	location.lname,
-																)
-															}
+															<TableCell component='th' scope='row'>
+																{index + 1}
+															</TableCell>
+															<TableCell align='right'>{location.lname}</TableCell>
+															<TableCell align='right'>Add</TableCell>
+															<TableCell align='right'>
+																<Button
+																	variant='outlined'
+																	onClick={() =>
+																		handleMarker(
+																			location._id,
+																			location.lat,
+																			location.long,
+																			location.lname,
+																		)
+																	}
+																>
+																	Search
+																</Button>
+															</TableCell>
+														</TableRow>
+												  ))
+												: locationData.map((location, index) => (
+														<TableRow
+															key={location._id}
+															sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
 														>
-															Search
-														</Button>
-													</TableCell>
-												</TableRow>
-										  ))}
-								</TableBody>
-							</Table>
-						</TableContainer>
+															<TableCell component='th' scope='row'>
+																{index + 1}
+															</TableCell>
+															<TableCell align='right'>{location.lname}</TableCell>
+															<TableCell align='right'>Add</TableCell>
+															<TableCell align='right'>
+																<Button
+																	variant='outlined'
+																	onClick={() =>
+																		handleMarker(
+																			location._id,
+																			location.lat,
+																			location.long,
+																			location.lname,
+																		)
+																	}
+																>
+																	Search
+																</Button>
+															</TableCell>
+														</TableRow>
+												  ))}
+										</TableBody>
+									</Table>
+								</TableContainer>
+							</Box>
+						)}
 					</Box>
 				</Grid>
 			</Grid>
