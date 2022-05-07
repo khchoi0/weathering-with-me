@@ -1,0 +1,4 @@
+/* Overwrite MUI Menu default style */
+.menu-container ul {
+	padding: 0px !important;
+}

@@ -1,16 +1,23 @@
 import './Main.css';
 import { Layout } from '../Layout/Layout';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { MAPBOX } from '../../config/Config';
 import { Room } from '@mui/icons-material';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { getAllLocations, getWeatherDataByLocname } from '../../api/location';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 import { Table } from '../UI/Table/Table';
+import { FavLists } from '../UI/FavLists/FavLists';
 
 export const Main = () => {
+	// Get current login user
+	const { user } = useContext(AuthContext);
+
 	const [locationData, setLocationData] = useState([]);
 	const [currentLocId, setCurrentLocId] = useState(null);
 	const [locationName, setLocationName] = useState(null);
@@ -24,6 +31,7 @@ export const Main = () => {
 	const [weatherText, setWeatherText] = useState(null);
 	const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
 	const [showComment, setShowComment] = useState(false);
+	const [favLists, setFavLists] = useState([]);
 
 	// The initial location is Hong Kong
 	const [viewport, setViewport] = useState({
@@ -67,7 +75,6 @@ export const Main = () => {
 	const init = async () => {
 		try {
 			const locations = await getAllLocations();
-			console.log(locations.data);
 			setLocationData(locations.data);
 		} catch (error) {
 			if (error.response) {
@@ -79,6 +86,7 @@ export const Main = () => {
 	// Reload when refresh
 	useEffect(() => {
 		init();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
@@ -179,7 +187,43 @@ export const Main = () => {
 					{showComment ? (
 						<h1>Comment</h1>
 					) : (
-						<Table locationData={locationData} handleMarker={handleMarker} />
+						<>
+							<Box
+								component='div'
+								sx={{
+									display: 'flex',
+									alignItems: 'center',
+									justifyContent: 'space-between',
+									flexWrap: 'wrap',
+								}}
+							>
+								<FavLists
+									favLists={favLists}
+									setFavLists={setFavLists}
+									handleMarker={handleMarker}
+								/>
+								{user.isAdmin && (
+									<Button
+										variant='contained'
+										sx={{
+											my: 2,
+											color: 'white',
+											display: 'flex',
+											alignItems: 'center',
+											'&:hover': { color: 'tertiary.dark' },
+										}}
+									>
+										<AutorenewIcon sx={{ paddingRight: '6px' }} />
+										Updated
+									</Button>
+								)}
+							</Box>
+							<Table
+								locationData={locationData}
+								handleMarker={handleMarker}
+								setFavLists={setFavLists}
+							/>
+						</>
 					)}
 				</Grid>
 			</Grid>
