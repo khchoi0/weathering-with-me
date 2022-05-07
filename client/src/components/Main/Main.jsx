@@ -8,15 +8,8 @@ import { getAllLocations, getWeatherDataByLocname } from '../../api/location';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';
+import MaterialTable from 'material-table';
 
 export const Main = () => {
 	const [locationData, setLocationData] = useState([]);
@@ -31,8 +24,6 @@ export const Main = () => {
 	const [weatherIcon, setWeatherIcon] = useState(null);
 	const [weatherText, setWeatherText] = useState(null);
 	const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
-	const [searchValue, setSearchValue] = useState('');
-	const [searchResult, setSearchResult] = useState([]);
 	const [showComment, setShowComment] = useState(false);
 
 	// The initial location is Hong Kong
@@ -73,21 +64,45 @@ export const Main = () => {
 		setShowComment(false);
 	};
 
-	// Table search
-	const searchFilterTable = (e) => {
-		if (e.target.value !== '') {
-			setSearchValue(e.target.value);
-			const filteredTable = locationData.filter((o) =>
-				Object.keys(o).some((k) =>
-					String(o[k]).toLowerCase().includes(e.target.value.toLowerCase()),
-				),
-			);
-			setSearchResult([...filteredTable]);
-		} else {
-			setSearchValue(e.target.value);
-			locationData([...locationData]);
-		}
+	// Search single location button
+	const handleSingleSearch = (rowData) => {
+		return (
+			<Button
+				variant='outlined'
+				onClick={() =>
+					handleMarker(rowData._id, rowData.lat, rowData.long, rowData.lname)
+				}
+			>
+				Search
+			</Button>
+		);
 	};
+
+	// Show location index from 1
+	const handleLocationIndex = (rowData) => {
+		const index = rowData.tableData.id + 1;
+		return index;
+	};
+
+	const columns = [
+		{
+			title: '#',
+			field: 'tableData.id',
+			render: (rowData) => handleLocationIndex(rowData),
+		},
+		{
+			title: 'LocName',
+			field: 'lname',
+		},
+		{
+			title: 'Add To Fav',
+			field: '',
+		},
+		{
+			title: 'Search',
+			render: (rowData) => handleSingleSearch(rowData),
+		},
+	];
 
 	// Initialize
 	const init = async () => {
@@ -202,90 +217,16 @@ export const Main = () => {
 					</ReactMapGL>
 				</Grid>
 				<Grid item md={4} sm={12} xs={12}>
-					<Box component='div' sx={{ pr: 1, pt: 1, height: '100vh', overflow: 'scroll' }}>
-						{showComment ? (
-							<h1>Comment</h1>
-						) : (
-							<Box component='div'>
-								<InputBase
-									className='searchInput'
-									type='text'
-									placeholder='Search location...'
-									value={searchValue}
-									onChange={searchFilterTable}
-								/>
-								<TableContainer component={Paper}>
-									<Table sx={{ minWidth: 560 }} aria-label='simple table'>
-										<TableHead>
-											<TableRow>
-												<TableCell>#</TableCell>
-												<TableCell align='right'>LocName</TableCell>
-												<TableCell align='right'>Add To Fav</TableCell>
-												<TableCell align='right'>Search</TableCell>
-											</TableRow>
-										</TableHead>
-										<TableBody>
-											{searchValue.length > 0
-												? searchResult.map((location, index) => (
-														<TableRow
-															key={location._id}
-															sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-														>
-															<TableCell component='th' scope='row'>
-																{index + 1}
-															</TableCell>
-															<TableCell align='right'>{location.lname}</TableCell>
-															<TableCell align='right'>Add</TableCell>
-															<TableCell align='right'>
-																<Button
-																	variant='outlined'
-																	onClick={() =>
-																		handleMarker(
-																			location._id,
-																			location.lat,
-																			location.long,
-																			location.lname,
-																		)
-																	}
-																>
-																	Search
-																</Button>
-															</TableCell>
-														</TableRow>
-												  ))
-												: locationData.map((location, index) => (
-														<TableRow
-															key={location._id}
-															sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-														>
-															<TableCell component='th' scope='row'>
-																{index + 1}
-															</TableCell>
-															<TableCell align='right'>{location.lname}</TableCell>
-															<TableCell align='right'>Add</TableCell>
-															<TableCell align='right'>
-																<Button
-																	variant='outlined'
-																	onClick={() =>
-																		handleMarker(
-																			location._id,
-																			location.lat,
-																			location.long,
-																			location.lname,
-																		)
-																	}
-																>
-																	Search
-																</Button>
-															</TableCell>
-														</TableRow>
-												  ))}
-										</TableBody>
-									</Table>
-								</TableContainer>
-							</Box>
-						)}
-					</Box>
+					{showComment ? (
+						<h1>Comment</h1>
+					) : (
+						<MaterialTable
+							title='All Locations'
+							data={locationData}
+							columns={columns}
+							options={{ pageSize: 10 }}
+						/>
+					)}
 				</Grid>
 			</Grid>
 		</Layout>
