@@ -5,7 +5,7 @@
 
 .popup-container {
 	width: 220px;
-	height: 430px;
+	height: 460px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
