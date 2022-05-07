@@ -19,9 +19,12 @@ const UserSchema = new mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
-		all_fav_lid: {
-			type: Array,
-		},
+		all_fav_lid: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'Location',
+			},
+		],
 	},
 	{ timestamps: true },
 );
