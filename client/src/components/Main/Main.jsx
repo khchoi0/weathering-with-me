@@ -8,8 +8,7 @@ import { getAllLocations, getWeatherDataByLocname } from '../../api/location';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import MaterialTable from 'material-table';
+import { Table } from '../UI/Table/Table';
 
 export const Main = () => {
 	const [locationData, setLocationData] = useState([]);
@@ -63,46 +62,6 @@ export const Main = () => {
 		setCurrentLocId(null);
 		setShowComment(false);
 	};
-
-	// Search single location button
-	const handleSingleSearch = (rowData) => {
-		return (
-			<Button
-				variant='outlined'
-				onClick={() =>
-					handleMarker(rowData._id, rowData.lat, rowData.long, rowData.lname)
-				}
-			>
-				Search
-			</Button>
-		);
-	};
-
-	// Show location index from 1
-	const handleLocationIndex = (rowData) => {
-		const index = rowData.tableData.id + 1;
-		return index;
-	};
-
-	const columns = [
-		{
-			title: '#',
-			field: 'tableData.id',
-			render: (rowData) => handleLocationIndex(rowData),
-		},
-		{
-			title: 'LocName',
-			field: 'lname',
-		},
-		{
-			title: 'Add To Fav',
-			field: '',
-		},
-		{
-			title: 'Search',
-			render: (rowData) => handleSingleSearch(rowData),
-		},
-	];
 
 	// Initialize
 	const init = async () => {
@@ -220,12 +179,7 @@ export const Main = () => {
 					{showComment ? (
 						<h1>Comment</h1>
 					) : (
-						<MaterialTable
-							title='All Locations'
-							data={locationData}
-							columns={columns}
-							options={{ pageSize: 10 }}
-						/>
+						<Table locationData={locationData} handleMarker={handleMarker} />
 					)}
 				</Grid>
 			</Grid>
