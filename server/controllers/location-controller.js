@@ -101,7 +101,7 @@ exports.locUpdate = async (req, res) => {
  */
 exports.locDelete = async (req, res) => {
 	try {
-		let loc = await Location.deleteOne({ lname: req.body.lname });
+		let loc = await Location.deleteOne({ lname: req.params.lname });
 		if (loc.deletedCount === 0) {
 			return res.status(404).json({ message: 'The location does not existed' });
 		}
