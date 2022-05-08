@@ -1,17 +1,16 @@
 const User = require('../models/user-model');
 const bcrypt = require('bcrypt');
 
-
 /**
  * Register by a user /create a user by admin
- * 
+ *
  * @typedef requestBody
  * @property {String} username
  * @property {String} password
  * @property {boolean} isAdmin
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
 exports.register = async (req, res, next) => {
 	try {
@@ -23,7 +22,7 @@ exports.register = async (req, res, next) => {
 		const newUser = new User({
 			username: req.body.username,
 			password: hashedPassword,
-			isAdmin: req.body.isAdmin
+			isAdmin: req.body.isAdmin,
 		});
 
 		// Save user into database
@@ -40,13 +39,13 @@ exports.register = async (req, res, next) => {
 
 /**
  * Login as a user or admin
- * 
+ *
  * @typedef requestBody
  * @property {String} username
  * @property {String} password
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
 exports.login = async (req, res) => {
 	try {
@@ -69,9 +68,9 @@ exports.login = async (req, res) => {
 
 /**
  * Read all users only (not include admins)
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
 exports.userRead = async (req, res) => {
 	try {
@@ -86,17 +85,16 @@ exports.userRead = async (req, res) => {
 	}
 };
 
-
 /**
  * Update a user's information
- * 
+ *
  * @typedef requestBody
  * @property {String} oldUsername
  * @property {String} newUsername
  * @property {String} password
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
 exports.userUpdate = async (req, res) => {
 	try {
@@ -111,10 +109,17 @@ exports.userUpdate = async (req, res) => {
 
 		// Check new username's availability
 		if (oldUsername !== newUsername) {
-			let newUser = await User.findOne({ username: newUsername })
+			let newUser = await User.findOne({ username: newUsername });
 			if (newUser !== null) {
 				return res.status(405).json({ message: 'The username is occupied' });
 			}
+		}
+
+		// If password not changed
+		if (user.password === req.body.password) {
+			user.username = newUsername;
+			user.save();
+			return res.status(200).json(user);
 		}
 
 		// Update user
@@ -129,26 +134,29 @@ exports.userUpdate = async (req, res) => {
 	} catch (error) {
 		return res.status(500).json(error);
 	}
-}
+};
 
 /**
  * Delete a user
- * 
+ *
  * @typedef requestBody
  * @property {String} username
- * 
- * @param {import('express').Request} req 
- * @param {import('express').Response} res 
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
  */
 exports.userDelete = async (req, res) => {
 	try {
-		let delQuery = await User.deleteOne({ username: req.body.username, isAdmin: false });
+		let delQuery = await User.deleteOne({
+			username: req.params.username,
+			isAdmin: false,
+		});
 		if (delQuery.deletedCount === 0) {
-			return res.status(404).json({ message: 'User isnot found' });
+			return res.status(404).json({ message: 'User not found' });
 		}
 
-		res.status(200).json({ message: 'User is deleted' })
+		res.status(200).json({ message: 'User is deleted' });
 	} catch (err) {
 		return res.status(500).json(err);
 	}
-}
+};
