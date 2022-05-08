@@ -1,0 +1,27 @@
+.cms-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	margin: 30px 0 50px 0;
+}
+
+.usercms-container,
+.locationcms-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--primary-dark);
+	margin-bottom: 10px;
+}
+
+.cms-left-container,
+.cms-right-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.text-icon {
+	font-size: 39px;
+}

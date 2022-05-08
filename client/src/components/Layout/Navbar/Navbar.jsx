@@ -90,7 +90,7 @@ export const Navbar = () => {
 							}}
 						>
 							{user.isAdmin && (
-								<MenuItem>
+								<MenuItem component={RouterLink} to='/cms'>
 									<Typography textAlign='center'>ADMIN PAGE</Typography>
 								</MenuItem>
 							)}
