@@ -8,6 +8,6 @@ router.get('/loc/read', locRead);
 
 router.put('/loc/update', locUpdate);
 
-router.delete('/loc/delete', locDelete);
+router.delete('/loc/delete/:lname', locDelete);
 
 module.exports = router;
