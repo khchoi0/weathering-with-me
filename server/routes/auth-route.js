@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { register, login, userRead, userUpdate, userDelete } = require('../controllers/auth-controller');
+const {
+	register,
+	login,
+	userRead,
+	userUpdate,
+	userDelete,
+} = require('../controllers/auth-controller');
 
 router.post('/auth/register', register);
 
@@ -10,6 +16,6 @@ router.post('/auth/read', userRead);
 
 router.put('/auth/update', userUpdate);
 
-router.delete('/auth/delete', userDelete);
+router.delete('/auth/delete/:username', userDelete);
 
 module.exports = router;
