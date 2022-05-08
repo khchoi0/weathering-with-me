@@ -6,10 +6,8 @@ export const UserCMS = () => {
 	const [userList, setUserList] = useState([]);
 	const [reloadUser, setReloadUser] = useState(false);
 
-	console.log(userList);
-
-	// Show location index from 1
-	const handleLocationIndex = (rowData) => {
+	// Show user index from 1
+	const handleUserIndex = (rowData) => {
 		const index = rowData.tableData.id + 1;
 		return index;
 	};
@@ -45,8 +43,8 @@ export const UserCMS = () => {
 		{
 			title: '#',
 			field: 'tableData.id',
-			render: (rowData) => handleLocationIndex(rowData),
-			editable: false,
+			render: (rowData) => handleUserIndex(rowData),
+			editable: 'never',
 		},
 		{
 			title: 'Username',
