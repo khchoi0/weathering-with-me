@@ -5,7 +5,13 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import { readFav } from '../../../api/user';
 
-export const Table = ({ locationData, handleMarker, setFavLists }) => {
+export const Table = ({
+	locationData,
+	handleMarker,
+	setFavLists,
+	setShowNotif,
+	setNotifText,
+}) => {
 	// Get current login user
 	const { user } = useContext(AuthContext);
 
@@ -35,6 +41,8 @@ export const Table = ({ locationData, handleMarker, setFavLists }) => {
 	const handleAddToFav = async (username, locId) => {
 		await addToFav(username, locId);
 		setUpdateFavList(!updateFavList);
+		setShowNotif(true);
+		setNotifText('ADD_TO_FAV_SUCCESS');
 	};
 
 	// Add to fav lists
