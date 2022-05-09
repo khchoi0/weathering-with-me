@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react';
 import { readUser, createUser, deleteUser, updateUser } from '../../../api/auth';
 import MaterialTable from 'material-table';
 
-export const UserCMS = () => {
-	const [userList, setUserList] = useState([]);
+export const UserCMS = ({ userList, setUserList }) => {
+	// const [userList, setUserList] = useState([]);
 	const [reloadUser, setReloadUser] = useState(false);
 
 	// Show user index from 1

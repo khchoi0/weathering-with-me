@@ -7,8 +7,7 @@ import {
 } from '../../../api/location/index';
 import MaterialTable from 'material-table';
 
-export const LocationCMS = () => {
-	const [locationList, setLocationList] = useState([]);
+export const LocationCMS = ({ locationList, setLocationList }) => {
 	const [reloadLocation, setReloadLocation] = useState(false);
 
 	// Show location index from 1
