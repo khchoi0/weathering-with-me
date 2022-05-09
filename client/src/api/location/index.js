@@ -54,7 +54,7 @@ export const updateLocation = async (oldLname, newLname, lat, long) => {
 export const getWeatherDataByLocname = async (locName) => {
 	try {
 		const result = await axios.get(
-			`http://api.weatherapi.com/v1/current.json?key=${WEATHER_KEY}&q=${locName}&aqi=no`,
+			`https://api.weatherapi.com/v1/current.json?key=${WEATHER_KEY}&q=${locName}&aqi=no`,
 		);
 		return result;
 	} catch (error) {
