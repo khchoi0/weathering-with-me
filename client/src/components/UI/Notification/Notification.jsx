@@ -18,6 +18,16 @@ export const Notification = ({ type, show, setShow, autoCloseTime = 1500 }) => {
 					});
 				}
 				break;
+			case 'ADD_TO_FAV_SUCCESS':
+				if (show) {
+					toast.success('Add to favourite list successfully', {
+						toastId: 'ADD_TO_FAV_SUCCESS',
+						onClose: () => {
+							handleCloseNotif();
+						},
+					});
+				}
+				break;
 			default:
 				break;
 		}

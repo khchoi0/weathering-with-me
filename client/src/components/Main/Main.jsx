@@ -229,6 +229,8 @@ export const Main = () => {
 									favLists={favLists}
 									setFavLists={setFavLists}
 									handleMarker={handleMarker}
+									setShowNotif={setShowNotif}
+									setNotifText={setNotifText}
 								/>
 								{user.isAdmin && (
 									<Button
@@ -251,6 +253,8 @@ export const Main = () => {
 								locationData={locationData}
 								handleMarker={handleMarker}
 								setFavLists={setFavLists}
+								setShowNotif={setShowNotif}
+								setNotifText={setNotifText}
 							/>
 						</>
 					)}
