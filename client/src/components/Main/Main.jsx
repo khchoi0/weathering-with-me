@@ -13,6 +13,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { Table } from '../UI/Table/Table';
 import { FavLists } from '../UI/FavLists/FavLists';
+import { Notification } from '../UI/Notification/Notification';
 
 export const Main = () => {
 	// Get current login user
@@ -32,6 +33,8 @@ export const Main = () => {
 	const [lastUpdatedTime, setLastUpdatedTime] = useState(null);
 	const [showComment, setShowComment] = useState(false);
 	const [favLists, setFavLists] = useState([]);
+	const [showNotif, setShowNotif] = useState(false);
+	const [notifText, setNotifText] = useState('');
 
 	// The initial location is Hong Kong
 	const [viewport, setViewport] = useState({
@@ -71,6 +74,30 @@ export const Main = () => {
 		setShowComment(false);
 	};
 
+	// Admin refresh dataset
+	const handleRefresh = async () => {
+		const locationResult = await getAllLocations();
+		setLocationData(locationResult.data);
+		setViewport({
+			width: '100%',
+			height: '100vh',
+			latitude: 22.28,
+			longitude: 114.15,
+			zoom: 9,
+		});
+		setNotifText('REFRESH_SUCCESS');
+		setShowNotif(true);
+	};
+
+	// Show notification
+	const handleShowNotification = () => (
+		<>
+			{showNotif && (
+				<Notification type={notifText} show={showNotif} setShow={setShowNotif} />
+			)}
+		</>
+	);
+
 	// Initialize
 	const init = async () => {
 		try {
@@ -91,6 +118,7 @@ export const Main = () => {
 
 	return (
 		<Layout>
+			{handleShowNotification()}
 			<Grid container spacing={1}>
 				<Grid item md={8} sm={12} xs={12}>
 					{/* Mapbox */}
@@ -212,9 +240,10 @@ export const Main = () => {
 											alignItems: 'center',
 											'&:hover': { color: 'tertiary.dark' },
 										}}
+										onClick={handleRefresh}
 									>
 										<AutorenewIcon sx={{ paddingRight: '6px' }} />
-										Updated
+										REFRESH
 									</Button>
 								)}
 							</Box>
