@@ -3,6 +3,8 @@ import { Layout } from '../Layout/Layout';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 import { MAPBOX } from '../../config/Config';
 import { Room } from '@mui/icons-material';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
@@ -14,6 +16,9 @@ import Button from '@mui/material/Button';
 import { Table } from '../UI/Table/Table';
 import { FavLists } from '../UI/FavLists/FavLists';
 import { Notification } from '../UI/Notification/Notification';
+
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
 
 export const Main = () => {
 	// Get current login user
