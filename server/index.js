@@ -33,7 +33,7 @@ app.use(PREFIX, authRoutes);
 app.use(PREFIX, locRoutes);
 app.use(PREFIX, userRoutes);
 
-app.listen(8000, async () => {
+app.listen(PORT, async () => {
 	console.log(`Server is running on ${PORT}`);
 
 	// Connect to database
