@@ -15,11 +15,10 @@ export const RoutesPath = () => {
 				<Route path='/' element={user ? <Main /> : <Login />} />
 				<Route path='/login' element={user ? <Navigate to='/' /> : <Login />} />
 				<Route path='/register' element={user ? <Navigate to='/' /> : <Register />} />
-				{/* <Route
+				<Route
 					path='/cms'
 					element={user && user.isAdmin ? <AdminPage /> : <Navigate to='/' />}
-				/> */}
-				<Route path='/cms' element={<AdminPage />} />
+				/>
 			</Routes>
 		</Router>
 	);
