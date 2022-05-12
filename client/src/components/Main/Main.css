@@ -4,11 +4,13 @@
 }
 
 .popup-container {
-	width: 220px;
-	height: 460px;
+	align-items: center;
+	width: fit-content;
+	height: fit-content;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	min-width: 200px;
 }
 
 .popup-label {
@@ -21,7 +23,7 @@
 
 .popup-desc {
 	color: var(--otherColor-blue);
-	font-size: 30px;
+	font-size: 24px;
 	font-weight: bold;
 }
 
@@ -29,11 +31,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin: 5px;
 }
 
 .popup-title-container img {
-	width: 50px;
-	height: 50px;
+	width: 30px;
+	height: 30px;
+	margin: 0px 5px;
 }
 
 .popup-title {
@@ -61,17 +65,16 @@
 /* Overwrite Mapbox style */
 .mapboxgl-popup-close-button {
 	font-size: 26px !important;
+	font-weight: bolder;
+	padding: 5px;
+	height: 11.5%;
+	background-color: lightcoral;
 }
 
-#comment-section {
-	display: flex;
-	flex-direction: column;
+.map-container {
+	height: 500px;
+}
 
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	align-content: stretch;
-
-	height: 100%;
-	padding: 10px;
+.MuiCircularProgress-indeterminate {
+	animation: circular-rotate 0.5s linear infinite;
 }
