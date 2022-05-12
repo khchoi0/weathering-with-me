@@ -16,9 +16,7 @@ import Button from "@mui/material/Button";
 import { Table } from "../UI/Table/Table";
 import { FavLists } from "../UI/FavLists/FavLists";
 import { Notification } from "../UI/Notification/Notification";
-import TextField from "@mui/material/TextField";
-import CommentIcon from "@mui/icons-material/Comment";
-import Stack from "@mui/material/Stack";
+import { CommentSection } from "../UI/CommentSection/CommentSection";
 
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 mapboxgl.workerClass = require("worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker").default;
@@ -73,6 +71,7 @@ export const Main = () => {
     setWeatherText(weatherData.data.current.condition.text);
     setLastUpdatedTime(weatherData.data.current.last_updated);
     // Show comment trigger
+    setShowComment(false);
     setShowComment(true);
   };
 
@@ -233,35 +232,7 @@ export const Main = () => {
         </Grid>
         <Grid item md={4} sm={12} xs={12}>
           {showComment ? (
-            <div id="comment-section">
-              <div id="comment-title">
-                <h1>Comments</h1>
-              </div>
-              <div id="comment-ol"></div>
-              <div id="form-section">
-                <form>
-                  <Stack spacing={1}>
-                    <hr />
-                    <div>
-                      <TextField
-                        id="new-comment-place-holder"
-                        label="Leave a comment..."
-                        multiline
-                        rows={2}
-                        style={{ width: "100%", height: "auto" }}
-                      />
-                    </div>
-                    <Button
-                      id="comment-submit-button"
-                      variant="contained"
-                      startIcon={<CommentIcon />}
-                    >
-                      Comment
-                    </Button>
-                  </Stack>
-                </form>
-              </div>
-            </div>
+            <CommentSection currentLocId={currentLocId} />
           ) : (
             <>
               <Box

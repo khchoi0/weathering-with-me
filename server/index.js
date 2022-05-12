@@ -33,6 +33,7 @@ const commentRoutes = require("./routes/comment-route");
 app.use(PREFIX, authRoutes);
 app.use(PREFIX, locRoutes);
 app.use(PREFIX, userRoutes);
+app.use(PREFIX, commentRoutes);
 
 app.listen(PORT, async () => {
 	console.log(`Server is running on ${PORT}`);

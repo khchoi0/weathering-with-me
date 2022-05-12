@@ -1,11 +1,12 @@
 const Comment = require("../models/comment-model");
+var mongoose = require("mongoose");
 
 /**
  * Create a comment
  *
  * @typedef {object} requestBody
- * @property {String} locname
- * @property {String} username
+ * @property {mongoose.Schema.Types.ObjectId} lid
+ * @property {mongoose.Schema.Types.ObjectId} username
  * @property {String} content
  *
  * @param {import('express').Response} req
@@ -14,21 +15,12 @@ const Comment = require("../models/comment-model");
  */
 exports.commentCreate = async (req, res) => {
   try {
-    let loc = await Location.findOne({ lname: req.body.locname }, "_id");
-    if (loc === null) {
-      return res.status(404).json({ message: "The location does not existed" });
-    }
-
-    const user = await User.findOne({ username: req.body.username }, "_id");
-    if (user === null) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
     const comment = new Comment({
-      lid: loc._id,
-      uid: user._id,
+      lid: mongoose.Types.ObjectId(req.body.lid),
+      uid: mongoose.Types.ObjectId(req.body.uid),
       content: req.body.content,
     });
+
     const commentRes = await comment.save();
     res.status(200).json(commentRes);
   } catch (err) {
@@ -48,13 +40,13 @@ exports.commentCreate = async (req, res) => {
  */
 exports.commentRead = async (req, res) => {
   try {
-    const comment = await Comment.find({ lid: req.body.loc }, "-lid -__v")
+    const comments = await Comment.find(
+      { lid: mongoose.Types.ObjectId(req.params.lid) },
+      "-lid -__v -updatedAt"
+    )
       .populate("uid", "username")
       .sort("-_id");
-    if (comment === []) {
-      return res.status(404).json({ message: "No comments in database" });
-    }
-    res.status(200).json(comment);
+    res.status(200).json(comments);
   } catch (error) {
     return res.status(500).json(error);
   }

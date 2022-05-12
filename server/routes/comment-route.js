@@ -4,6 +4,6 @@ const { commentCreate, commentRead } = require('../controllers/comment-controlle
 
 router.post('/comment/create', commentCreate);
 
-router.get('/comment/read', commentRead);
+router.get('/comment/read/:lid', commentRead);
 
 module.exports = router;
