@@ -1,20 +1,20 @@
-import { AxiosInstance } from "../../utils/AxiosInstance";
+import { AxiosInstance } from '../../utils/AxiosInstance';
 
 export const getLocComment = async (lid) => {
-  try {
-    const result = await AxiosInstance.get("/api/comment/read");
-    return result;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
+	try {
+		const result = await AxiosInstance.get(`/api/comment/read/${lid}`);
+		return result;
+	} catch (error) {
+		console.log(error);
+		throw error;
+	}
 };
 
-export const createLocComment = async (locname, username, content) => {
+export const createLocComment = async (lid, uid, content) => {
 	try {
 		const result = await AxiosInstance.post('/api/comment/create', {
-			locname: locname,
-			username: username,
+			lid: lid,
+			uid: uid,
 			content: content,
 		});
 		return result;

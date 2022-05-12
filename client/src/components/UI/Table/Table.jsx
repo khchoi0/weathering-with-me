@@ -1,9 +1,8 @@
 import MaterialTable from 'material-table';
 import Button from '@mui/material/Button';
-import { addToFav } from '../../../api/user';
+import { addToFav, readFav } from '../../../api/user';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
-import { readFav } from '../../../api/user';
 
 export const Table = ({
 	locationData,
