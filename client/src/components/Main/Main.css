@@ -62,3 +62,20 @@
 .mapboxgl-popup-close-button {
 	font-size: 26px !important;
 }
+
+#comment-section {
+	display: flex;
+	flex-direction: column;
+
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+
+	height: 90%;
+}
+
+#comment-ol {
+	flex: 1 1 auto;
+	display: flex;
+}
