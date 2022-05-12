@@ -5,7 +5,6 @@ import CommentIcon from "@mui/icons-material/Comment";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
 import { AuthContext } from "../../../context/AuthContext";
@@ -55,7 +54,9 @@ export const CommentSection = ({ currentLocId }) => {
 
   return (
     <div id="comment-section">
-      <Paper elevation={3} style={{ padding: "10px" }}>
+      <Paper elevation={3}
+            style={{ padding: "10px"}}
+            sx={{ borderRadius: 2 }}>
         <div id="comment-title">
           <h1 style={{ textAlign: "center" }}>Comments</h1>
         </div>
