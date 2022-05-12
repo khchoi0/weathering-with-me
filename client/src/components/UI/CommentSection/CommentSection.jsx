@@ -53,14 +53,12 @@ export const CommentSection = ({ currentLocId }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [updateCommentList]);
 
-  return (
-    <div id="comment-section">
-      <Paper elevation={3}
-            style={{ padding: "10px"}}
-            sx={{ borderRadius: 2 }}>
-        <div id="comment-title">
-          <h1 style={{ textAlign: "center" }}>Comments</h1>
-        </div>
+	return (
+		<div id='comment-section'>
+			<Paper elevation={3} style={{ padding: '10px' }} sx={{ borderRadius: 2 }}>
+				<div id='comment-title'>
+					<h1 style={{ textAlign: 'center' }}>Comments</h1>
+				</div>
 				<div id='comment-ol'>
 					<List>
 						<TransitionGroup>
