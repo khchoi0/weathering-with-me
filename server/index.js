@@ -27,11 +27,13 @@ app.use(bodyParser.json());
 const authRoutes = require('./routes/auth-route');
 const locRoutes = require('./routes/location-route');
 const userRoutes = require('./routes/user-route');
+const commentRoutes = require("./routes/comment-route");
 
 // Use routes
 app.use(PREFIX, authRoutes);
 app.use(PREFIX, locRoutes);
 app.use(PREFIX, userRoutes);
+app.use(PREFIX, commentRoutes);
 
 app.listen(PORT, async () => {
 	console.log(`Server is running on ${PORT}`);
