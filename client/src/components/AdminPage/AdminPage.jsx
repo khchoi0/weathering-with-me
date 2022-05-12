@@ -50,6 +50,7 @@ export const AdminPage = () => {
 						color: 'white',
 						alignItems: 'center',
 						'&:hover': { color: 'tertiary.dark' },
+						padding: "10px 50px"
 					}}
 					onClick={handleRefresh}
 				>
