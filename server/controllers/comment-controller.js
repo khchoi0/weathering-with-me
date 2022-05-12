@@ -1,5 +1,5 @@
-const Comment = require("../models/comment-model");
-var mongoose = require("mongoose");
+const Comment = require('../models/comment-model');
+var mongoose = require('mongoose');
 
 /**
  * Create a comment
@@ -14,18 +14,18 @@ var mongoose = require("mongoose");
  * @returns
  */
 exports.commentCreate = async (req, res) => {
-  try {
-    const comment = new Comment({
-      lid: mongoose.Types.ObjectId(req.body.lid),
-      uid: mongoose.Types.ObjectId(req.body.uid),
-      content: req.body.content,
-    });
+	try {
+		const comment = new Comment({
+			lid: mongoose.Types.ObjectId(req.body.lid),
+			uid: mongoose.Types.ObjectId(req.body.uid),
+			content: req.body.content,
+		});
 
-    const commentRes = await comment.save();
-    res.status(200).json(commentRes);
-  } catch (err) {
-    return res.status(500).json(err);
-  }
+		const commentRes = await comment.save();
+		res.status(200).json(commentRes);
+	} catch (err) {
+		return res.status(500).json(err);
+	}
 };
 
 /**
@@ -39,15 +39,15 @@ exports.commentCreate = async (req, res) => {
  * @returns
  */
 exports.commentRead = async (req, res) => {
-  try {
-    const comments = await Comment.find(
-      { lid: mongoose.Types.ObjectId(req.params.lid) },
-      "-lid -__v -updatedAt"
-    )
-      .populate("uid", "username")
-      .sort("-_id");
-    res.status(200).json(comments);
-  } catch (error) {
-    return res.status(500).json(error);
-  }
+	try {
+		const comments = await Comment.find(
+			{ lid: mongoose.Types.ObjectId(req.params.lid) },
+			'-lid -__v -updatedAt',
+		)
+			.populate('uid', 'username')
+			.sort('-_id');
+		res.status(200).json(comments);
+	} catch (error) {
+		return res.status(500).json(error);
+	}
 };
