@@ -135,156 +135,150 @@ export const Main = () => {
       {handleShowNotification()}
       <Grid container spacing={1} style={{ flexGrow: 1 }}>
         <Grid item md={8} sm={12} xs={12}>
-          <Paper
-            elevation={3}
-            style={{ margin: "10px", overflow: "hidden", height: "82vh" }}
-            sx={{ borderRadius: 2 }}
-          >
-            {/* Mapbox */}
-            <ReactMapGL
-              {...viewport}
-              mapboxApiAccessToken={MAPBOX}
-              onViewportChange={(nextViewport) => setViewport(nextViewport)}
-              mapStyle="mapbox://styles/safak/cknndpyfq268f17p53nmpwira"
+          <div className="left-container">
+            <Paper
+              className="map-container"
+              elevation={3}
+              sx={{ borderRadius: 2 }}
             >
-              {locationData.map((locationItem) => (
-                <Box component="div" key={locationItem._id}>
-                  <Marker
-                    latitude={locationItem.lat}
-                    longitude={locationItem.long}
-                    offsetLeft={-3.5 * viewport.zoom}
-                    offsetTop={-7 * viewport.zoom}
-                  >
-                    <Room
-                      className="marker-icon"
-                      onClick={() =>
-                        handleMarker(
-                          locationItem._id,
-                          locationItem.lat,
-                          locationItem.long,
-                          locationItem.lname
-                        )
-                      }
-                      style={{ fontSize: viewport.zoom * 7 }}
-                    />
-                  </Marker>
-                  {locationItem._id === currentLocId &&
-                    ((lastUpdatedTime && (
-                      <Popup
-                        latitude={locationItem.lat}
-                        longitude={locationItem.long}
-                        closeButton={true}
-                        closeOnClick={false}
-                        anchor="left"
-                        onClose={handlePopupClose}
-                      >
-                        <Box component="div" className="popup-container">
-                          <Box
-                            component="div"
-                            className="popup-title-container"
-                          >
-                            <Typography variant="h5" className="popup-title">
-                              <b>{locationName}</b>
-                            </Typography>
-                            <Box
-                              component="img"
-                              src={weatherIcon}
-                              alt={weatherText}
-                            />
-                          </Box>
-                          <Divider
-                            style={{ width: "110%", marginTop: "5px" }}
-                          />
-                          <Box component="label" className="popup-label">
-                            Temperature
-                          </Box>
-                          <Typography variant="p" className="popup-desc">
-                            {temperature}&#8451;
-                          </Typography>
-                          <Box component="label" className="popup-label">
-                            Wind Speed
-                          </Box>
-                          <Typography variant="p" className="popup-desc">
-                            {windSpeed} km/h
-                          </Typography>
-                          <Box component="label" className="popup-label">
-                            Wind direction
-                          </Box>
-                          <Typography variant="p" className="popup-desc">
-                            {windDirection}
-                          </Typography>
-                          <Box component="label" className="popup-label">
-                            Humidity
-                          </Box>
-                          <Typography variant="p" className="popup-desc">
-                            {humidity}%
-                          </Typography>
-                          <Box component="label" className="popup-label">
-                            Precipitation
-                          </Box>
-                          <Typography variant="p" className="popup-desc">
-                            {precipitation}%
-                          </Typography>
-                          <Box component="label" className="popup-label">
-                            Visibility
-                          </Box>
-                          <Typography variant="p" className="popup-desc">
-                            {visibility}km
-                          </Typography>
-                          <Typography
-                            variant="p"
-                            className="popup-time"
-                            sx={{ pt: 1 }}
-                          >
-                            Last Updated Time: <br />
-                            {lastUpdatedTime}
-                          </Typography>
-                        </Box>
-                      </Popup>
-                    )) || (
-                      <Popup
-                        latitude={locationItem.lat}
-                        longitude={locationItem.long}
-                        closeButton={false}
-                        closeOnClick={false}
-                        anchor="left"
-                        onClose={handlePopupClose}
-                      >
-                        <div
-                          style={{
-                            padding: "10px 20px 3px 20px",
-                            height: "fit-content",
-                            display: "flex",
-                          }}
+              {/* Mapbox */}
+              <ReactMapGL
+                {...viewport}
+                mapboxApiAccessToken={MAPBOX}
+                onViewportChange={(nextViewport) => setViewport(nextViewport)}
+                mapStyle="mapbox://styles/safak/cknndpyfq268f17p53nmpwira"
+              >
+                {locationData.map((locationItem) => (
+                  <Box component="div" key={locationItem._id}>
+                    <Marker
+                      latitude={locationItem.lat}
+                      longitude={locationItem.long}
+                      offsetLeft={-3.5 * viewport.zoom}
+                      offsetTop={-7 * viewport.zoom}
+                    >
+                      <Room
+                        className="marker-icon"
+                        onClick={() =>
+                          handleMarker(
+                            locationItem._id,
+                            locationItem.lat,
+                            locationItem.long,
+                            locationItem.lname
+                          )
+                        }
+                        style={{ fontSize: viewport.zoom * 7 }}
+                      />
+                    </Marker>
+                    {locationItem._id === currentLocId &&
+                      ((lastUpdatedTime && (
+                        <Popup
+                          latitude={locationItem.lat}
+                          longitude={locationItem.long}
+                          closeButton={true}
+                          closeOnClick={false}
+                          anchor="left"
+                          onClose={handlePopupClose}
                         >
-                          <CircularProgress
-                            size={20}
-                            style={{ marginRight: "15px" }}
-                            disableShrink 
-                          />
-                          <b>LOADING</b>
-                        </div>
-                      </Popup>
-                    ))}
-                </Box>
-              ))}
-            </ReactMapGL>
-          </Paper>
+                          <Box component="div" className="popup-container">
+                            <Box
+                              component="div"
+                              className="popup-title-container"
+                            >
+                              <Typography variant="h5" className="popup-title">
+                                <b>{locationName}</b>
+                              </Typography>
+                              <Box
+                                component="img"
+                                src={weatherIcon}
+                                alt={weatherText}
+                              />
+                            </Box>
+                            <Divider
+                              style={{ width: "110%", marginTop: "5px" }}
+                            />
+                            <Box component="label" className="popup-label">
+                              Temperature
+                            </Box>
+                            <Typography variant="p" className="popup-desc">
+                              {temperature}&#8451;
+                            </Typography>
+                            <Box component="label" className="popup-label">
+                              Wind Speed
+                            </Box>
+                            <Typography variant="p" className="popup-desc">
+                              {windSpeed} km/h
+                            </Typography>
+                            <Box component="label" className="popup-label">
+                              Wind direction
+                            </Box>
+                            <Typography variant="p" className="popup-desc">
+                              {windDirection}
+                            </Typography>
+                            <Box component="label" className="popup-label">
+                              Humidity
+                            </Box>
+                            <Typography variant="p" className="popup-desc">
+                              {humidity}%
+                            </Typography>
+                            <Box component="label" className="popup-label">
+                              Precipitation
+                            </Box>
+                            <Typography variant="p" className="popup-desc">
+                              {precipitation}%
+                            </Typography>
+                            <Box component="label" className="popup-label">
+                              Visibility
+                            </Box>
+                            <Typography variant="p" className="popup-desc">
+                              {visibility}km
+                            </Typography>
+                            <Typography
+                              variant="p"
+                              className="popup-time"
+                              sx={{ pt: 1 }}
+                            >
+                              Last Updated Time: <br />
+                              {lastUpdatedTime}
+                            </Typography>
+                          </Box>
+                        </Popup>
+                      )) || (
+                        <Popup
+                          latitude={locationItem.lat}
+                          longitude={locationItem.long}
+                          closeButton={false}
+                          closeOnClick={false}
+                          anchor="left"
+                          onClose={handlePopupClose}
+                        >
+                          <div
+                            style={{
+                              padding: "10px 20px 3px 20px",
+                              height: "fit-content",
+                              display: "flex",
+                            }}
+                          >
+                            <CircularProgress
+                              size={20}
+                              style={{ marginRight: "15px" }}
+                              disableShrink
+                            />
+                            <b>LOADING</b>
+                          </div>
+                        </Popup>
+                      ))}
+                  </Box>
+                ))}
+              </ReactMapGL>
+            </Paper>
+          </div>
         </Grid>
         <Grid item md={4} sm={12} xs={12}>
           {showComment ? (
             <CommentSection currentLocId={currentLocId} />
           ) : (
-            <>
-              <Paper
-                elevation={3}
-                style={{
-                  margin: "10px 10px 10px 0px",
-                  overflow: "hidden",
-                  height: "82vh",
-                }}
-                sx={{ borderRadius: 2 }}
-              >
+            <div className="right-container">
+              <Paper className="right-paper" elevation={3} sx={{ borderRadius: 2 }}>
                 <Box
                   component="div"
                   sx={{
@@ -320,12 +314,7 @@ export const Main = () => {
                     </Button>
                   )}
                 </Box>
-                <Box
-                  style={{
-                    height: "72vh",
-                    overflow: "scroll",
-                  }}
-                >
+                <div className="table-container">
                   <Table
                     locationData={locationData}
                     handleMarker={handleMarker}
@@ -333,9 +322,9 @@ export const Main = () => {
                     setShowNotif={setShowNotif}
                     setNotifText={setNotifText}
                   />
-                </Box>
+                </div>
               </Paper>
-            </>
+            </div>
           )}
         </Grid>
       </Grid>

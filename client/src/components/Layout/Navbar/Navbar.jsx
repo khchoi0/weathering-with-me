@@ -14,7 +14,6 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 import { Link as RouterLink } from "react-router-dom";
 import WeatherIcon from "../../../assets/images/weather-icon.png";
-import { fontWeight } from "@mui/system";
 
 export const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -95,7 +94,7 @@ export const Navbar = () => {
               }}
             >
               {user.isAdmin && (
-                <MenuItem component={RouterLink} to="/cms">
+                <MenuItem component={RouterLink} to="/cms" style={{padding:"5px 30px"}} >
                   <Typography textAlign="center">Admin Page</Typography>
                 </MenuItem>
               )}
@@ -127,7 +126,7 @@ export const Navbar = () => {
                 sx={{
                   padding: "5px",
                   borderRadius: "11%",
-                  "&:hover": { color: "#2ecc71" },
+                  "&:hover": { color: "otherColor.dark" },
                   margin: "5px",
                 }}
                 color="inherit"

@@ -31,3 +31,9 @@
 .text-icon {
 	font-size: 40px;
 }
+
+@media only screen and (max-width: 900px) {
+	.cms-right-container {
+		margin-top: 20px;
+	}
+}

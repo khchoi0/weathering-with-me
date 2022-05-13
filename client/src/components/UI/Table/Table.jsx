@@ -17,6 +17,12 @@ export const Table = ({
   // Trigger update fav lists
   const [updateFavList, setUpdateFavList] = useState(true);
 
+  // Show location index from 1
+  const handleLocationIndex = (rowData) => {
+    const index = rowData.tableData.id + 1;
+    return index;
+  };
+
   // Search single location button
   const handleSingleSearch = (rowData) => {
     return (
@@ -52,6 +58,12 @@ export const Table = ({
   };
 
   const columns = [
+		{
+			title: '#',
+			field: 'tableData.id',
+			render: (rowData) => handleLocationIndex(rowData),
+			editable: 'never',
+		},
     {
       title: "Name",
       field: "lname",

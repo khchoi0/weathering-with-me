@@ -78,3 +78,68 @@
 .MuiCircularProgress-indeterminate {
 	animation: circular-rotate 0.5s linear infinite;
 }
+
+.left-container {
+	display: flex;
+	flex-direction: column;
+
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+
+	height: fit-content;
+	padding: 10px;
+}
+
+.right-container {
+	display: flex;
+	flex-direction: column;
+
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+
+	height: fit-content;
+	padding: 10px 10px 10px 0px;
+}
+
+.map-container {
+	height: 82vh;
+	overflow: hidden;
+}
+
+.right-paper {
+	overflow: hidden; 
+	height: 82vh;
+}
+
+.table-container {
+	height: 73vh;
+	overflow-y: scroll;
+}
+
+@media only screen and (max-width: 1160px) {
+	.table-container {
+		height: 63vh;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	.left-container {
+		padding: 10px;
+	}
+
+	.right-container {
+		padding: 10px;
+	}
+
+	.right-paper {
+		height: fit-content;
+	}
+
+	.table-container {
+		height: 60vh;
+	}
+}
