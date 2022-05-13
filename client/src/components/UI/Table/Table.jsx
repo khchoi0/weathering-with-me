@@ -1,8 +1,8 @@
-import MaterialTable from "material-table";
-import Button from "@mui/material/Button";
-import { addToFav, readFav } from "../../../api/user";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../context/AuthContext";
+import MaterialTable from 'material-table';
+import Button from '@mui/material/Button';
+import { addToFav, readFav } from '../../../api/user';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../../../context/AuthContext';
 
 export const Table = ({
   locationData,
