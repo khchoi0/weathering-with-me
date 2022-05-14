@@ -33,7 +33,7 @@ export const Login = () => {
 	const handleClick = async () => {
 		const response = await loginCall(
 			{ username: username.current.value, password: password.current.value },
-			dispatch,
+			dispatch
 		);
 
 		// Validation fail
@@ -52,8 +52,7 @@ export const Login = () => {
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
-				}}
-			>
+				}}>
 				<Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
 					<LockOutlinedIcon />
 				</Avatar>

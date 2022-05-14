@@ -65,14 +65,14 @@ export const CommentSection = ({ currentLocId }) => {
 							{commentList.map((comment) => (
 								<Collapse key={comment._id}>
 									<div className='comment-li'>
-										<div className='comment-meta' style={{ padding: '5px' }}>
+										<div className='comment-meta'>
 											<h4>
 												{comment.uid.username}{' '}
 												<span>
 													@{' '}
 													{new Date(comment.createdAt).toLocaleDateString(
 														'en-GB',
-														dateOptions,
+														dateOptions
 													)}
 												</span>{' '}
 											</h4>
@@ -108,8 +108,7 @@ export const CommentSection = ({ currentLocId }) => {
 								id='comment-submit-button'
 								variant='contained'
 								startIcon={<CommentIcon />}
-								onClick={handleCommentSubmit}
-							>
+								onClick={handleCommentSubmit}>
 								Comment
 							</Button>
 						</Stack>

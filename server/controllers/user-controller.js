@@ -15,7 +15,7 @@ exports.addToFavList = async (req, res) => {
 		// Add to favorite list without duplication
 		let addFavQuery = await User.updateOne(
 			{ username: req.body.username },
-			{ $addToSet: { all_fav_lid: req.body._id } },
+			{ $addToSet: { all_fav_lid: req.body._id } }
 		);
 		if (!addFavQuery) {
 			return res.status(404).json({ message: 'Cannot add to favorite list! ' });
@@ -23,7 +23,7 @@ exports.addToFavList = async (req, res) => {
 		// Add to favorite list succeeded
 		let user = await User.findOne(
 			{ username: req.body.username },
-			'username all_fav_lid',
+			'username all_fav_lid'
 		).populate('all_fav_lid');
 		if (user === null) {
 			return res.status(404).json({ message: 'User not found' });
@@ -49,14 +49,14 @@ exports.removeFromFavList = async (req, res) => {
 		// Remove from favorite list
 		let removeFavQuery = await User.updateOne(
 			{ username: req.body.username },
-			{ $pull: { all_fav_lid: req.body._id } },
+			{ $pull: { all_fav_lid: req.body._id } }
 		).populate('all_fav_lid');
 		if (!removeFavQuery) {
 			return res.status(404).json({ message: 'Cannot remove from favorite list!' });
 		}
 		let user = await User.findOne(
 			{ username: req.body.username },
-			'username all_fav_lid',
+			'username all_fav_lid'
 		).populate('all_fav_lid');
 		if (user === null) {
 			return res.status(404).json({ message: 'User not found' });
@@ -79,7 +79,7 @@ exports.removeFromFavList = async (req, res) => {
 exports.readFavList = async (req, res) => {
 	try {
 		const favLists = await User.findOne({ _id: req.params.uid }, 'all_fav_lid').populate(
-			'all_fav_lid',
+			'all_fav_lid'
 		);
 		res.status(200).json(favLists.all_fav_lid);
 	} catch (error) {

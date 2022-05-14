@@ -35,7 +35,7 @@ export const Register = () => {
 	const handleClick = async () => {
 		const response = await registerCall(
 			{ username: username.current.value, password: password.current.value },
-			dispatch,
+			dispatch
 		);
 
 		// User exists in database
@@ -54,8 +54,7 @@ export const Register = () => {
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
-				}}
-			>
+				}}>
 				<Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
 					<LockOutlinedIcon />
 				</Avatar>
@@ -66,8 +65,7 @@ export const Register = () => {
 					component='form'
 					noValidate
 					sx={{ mt: 1 }}
-					onSubmit={handleSubmit(handleClick)}
-				>
+					onSubmit={handleSubmit(handleClick)}>
 					{userExist ? <Alert severity='error'>User already exists</Alert> : null}
 					<TextField
 						margin='normal'

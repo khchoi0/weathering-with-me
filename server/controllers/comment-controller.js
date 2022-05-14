@@ -42,7 +42,7 @@ exports.commentRead = async (req, res) => {
 	try {
 		const comments = await Comment.find(
 			{ lid: mongoose.Types.ObjectId(req.params.lid) },
-			'-lid -__v -updatedAt',
+			'-lid -__v -updatedAt'
 		)
 			.populate('uid', 'username')
 			.sort('-_id');

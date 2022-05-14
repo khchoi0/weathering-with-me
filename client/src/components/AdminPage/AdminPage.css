@@ -1,39 +1,39 @@
 * {
-	font-family: 'Nunito', sans-serif;
+    font-family: 'Nunito', sans-serif;
 }
 
 .admin-container {
-	text-align: center;
-	margin-top: 30px;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .cms-container {
-	margin: 20px 0 50px 0;
+    margin: 20px 0 50px 0;
 }
 
 .usercms-container,
 .locationcms-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: var(--primary-dark);
-	margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
 }
 
 .cms-left-container,
 .cms-right-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .text-icon {
-	font-size: 40px;
+    font-size: 40px;
 }
 
 @media only screen and (max-width: 900px) {
-	.cms-right-container {
-		margin-top: 20px;
-	}
+    .cms-right-container {
+        margin-top: 20px;
+    }
 }

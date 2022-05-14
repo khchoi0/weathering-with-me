@@ -1,31 +1,31 @@
 :root {
-	--primary-main: #68a7ad;
-	--primary-light: #76c0c7;
-	--primary-dark: #51969c;
-	--secondary-main: #99c4c8;
-	--secondary-light: #a1c5c9;
-	--secondary-dark: #8ab8bd;
-	--tertiary-main: #edc37b;
-	--tertiary-light: #e7d2ac;
-	--tertiary-dark: #e2ab4d;
-	--quaternary-main: #eee4ab;
-	--quaternary-light: #eee5b8;
-	--quaternary-dark: #e0d389;
-	--quinary-main: #f55353;
-	--otherColor-white: #ffffff;
-	--otherColor-black: #012530;
-	--otherColor-grey: #5c5d5e;
-	--otherColor-blue: #143f6b;
+    --primary-main: #68a7ad;
+    --primary-light: #76c0c7;
+    --primary-dark: #51969c;
+    --secondary-main: #99c4c8;
+    --secondary-light: #a1c5c9;
+    --secondary-dark: #8ab8bd;
+    --tertiary-main: #edc37b;
+    --tertiary-light: #e7d2ac;
+    --tertiary-dark: #e2ab4d;
+    --quaternary-main: #eee4ab;
+    --quaternary-light: #eee5b8;
+    --quaternary-dark: #e0d389;
+    --quinary-main: #f55353;
+    --otherColor-white: #ffffff;
+    --otherColor-black: #012530;
+    --otherColor-grey: #5c5d5e;
+    --otherColor-blue: #143f6b;
 }
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
 }
 
 body {
-	overflow-x: hidden;
-	font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+    font-family: 'Nunito', sans-serif;
 }

@@ -67,8 +67,7 @@ export const FavLists = ({ favLists, setFavLists, handleMarker }) => {
 					'&:hover': { color: 'quinary.main' },
 					margin: '20px',
 					width: 'fit-content',
-				}}
-			>
+				}}>
 				<FavoriteIcon sx={{ paddingRight: '6px' }} />
 				<Typography variant='p'>Favourite Lists</Typography>
 			</Button>
@@ -80,8 +79,7 @@ export const FavLists = ({ favLists, setFavLists, handleMarker }) => {
 				onClose={handleCloseFavLists}
 				MenuListProps={{
 					'aria-labelledby': 'basic-button',
-				}}
-			>
+				}}>
 				<TableContainer component={Paper}>
 					<Table aria-label='simple table'>
 						<TableHead>
@@ -95,8 +93,7 @@ export const FavLists = ({ favLists, setFavLists, handleMarker }) => {
 							{favLists.map((favLocation) => (
 								<TableRow
 									key={favLocation._id}
-									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-								>
+									sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 									<TableCell component='th' scope='row'>
 										{favLocation.lname}
 									</TableCell>
@@ -104,8 +101,9 @@ export const FavLists = ({ favLists, setFavLists, handleMarker }) => {
 										<Button
 											variant='outlined'
 											color='quinary'
-											onClick={() => handleRemoveFromFav(user.username, favLocation._id)}
-										>
+											onClick={() =>
+												handleRemoveFromFav(user.username, favLocation._id)
+											}>
 											Remove
 										</Button>
 									</TableCell>
@@ -118,10 +116,9 @@ export const FavLists = ({ favLists, setFavLists, handleMarker }) => {
 													favLocation._id,
 													favLocation.lat,
 													favLocation.long,
-													favLocation.lname,
+													favLocation.lname
 												)
-											}
-										>
+											}>
 											Search
 										</Button>
 									</TableCell>

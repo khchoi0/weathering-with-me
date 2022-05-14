@@ -44,122 +44,120 @@ export const Navbar = () => {
 		window.location.reload();
 	};
 
-  return (
-    <AppBar position="static">
-      <Container maxWidth="xl"  style={{ height: "60px" }}>
-        <Toolbar disableGutters>
-          <RouterLink to="/" style={{ textDecoration: "none" }}>
-            <div style={{ display: "inline-flex" }}>
-              <Box
-                component="img"
-                alt="app icon"
-                src={WeatherIcon}
-                sx={{
-                  height: "55px",
-                  width: "auto",
-                  padding: "5px",
-                }}
-              />
-            </div>
-          </RouterLink>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            {user.isAdmin && (
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {user.isAdmin && (
-                <MenuItem component={RouterLink} to="/cms" style={{padding:"5px 30px"}} >
-                  <Typography textAlign="center">Admin Page</Typography>
-                </MenuItem>
-              )}
-            </Menu>
-          </Box>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {user.isAdmin && (
-              <Button
-                component={RouterLink}
-                to="/cms"
-                sx={{
-                  my: 2,
-                  color: "white",
-                  display: "block",
-                  padding: "5px",
-                  borderRadius: "11%",
-                  margin: "5px",
-                  "&:hover": { color: "otherColor.dark" },
-                }}
-              >
-                ADMIN PAGE
-              </Button>
-            )}
-          </Box>
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="View User Settings">
-              <IconButton
-                onClick={handleOpenUserMenu}
-                sx={{
-                  padding: "5px",
-                  borderRadius: "11%",
-                  "&:hover": { color: "otherColor.dark" },
-                  margin: "5px",
-                }}
-                color="inherit"
-              >
-                {user.username}
-                <AccountCircle
-                  sx={{ width: "35px", height: "35px", marginLeft: "5px" }}
-                />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              <MenuItem onClick={handleLogout} style={{padding:"5px 50px"}}>
-                <Typography textAlign="center">Logout</Typography>
-              </MenuItem>
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
-  );
+	return (
+		<AppBar position='static'>
+			<Container maxWidth='xl' style={{ height: '60px' }}>
+				<Toolbar disableGutters>
+					<RouterLink to='/' style={{ textDecoration: 'none' }}>
+						<div style={{ display: 'inline-flex' }}>
+							<Box
+								component='img'
+								alt='app icon'
+								src={WeatherIcon}
+								sx={{
+									height: '55px',
+									width: 'auto',
+									padding: '5px',
+								}}
+							/>
+						</div>
+					</RouterLink>
+					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+						{user.isAdmin && (
+							<IconButton
+								size='large'
+								aria-label='account of current user'
+								aria-controls='menu-appbar'
+								aria-haspopup='true'
+								onClick={handleOpenNavMenu}
+								color='inherit'>
+								<MenuIcon />
+							</IconButton>
+						)}
+						<Menu
+							id='menu-appbar'
+							anchorEl={anchorElNav}
+							anchorOrigin={{
+								vertical: 'bottom',
+								horizontal: 'left',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'left',
+							}}
+							open={Boolean(anchorElNav)}
+							onClose={handleCloseNavMenu}
+							sx={{
+								display: { xs: 'block', md: 'none' },
+							}}>
+							{user.isAdmin && (
+								<MenuItem
+									component={RouterLink}
+									to='/cms'
+									style={{ padding: '5px 30px' }}>
+									<Typography textAlign='center'>Admin Page</Typography>
+								</MenuItem>
+							)}
+						</Menu>
+					</Box>
+					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+						{user.isAdmin && (
+							<Button
+								component={RouterLink}
+								to='/cms'
+								sx={{
+									my: 2,
+									color: 'white',
+									display: 'block',
+									padding: '5px',
+									borderRadius: '11%',
+									margin: '5px',
+									'&:hover': { color: 'otherColor.dark' },
+								}}>
+								ADMIN PAGE
+							</Button>
+						)}
+					</Box>
+					<Box sx={{ flexGrow: 0 }}>
+						<Tooltip title='View User Settings'>
+							<IconButton
+								onClick={handleOpenUserMenu}
+								sx={{
+									padding: '5px',
+									borderRadius: '11%',
+									'&:hover': { color: 'otherColor.dark' },
+									margin: '5px',
+								}}
+								color='inherit'>
+								{user.username}
+								<AccountCircle
+									sx={{ width: '35px', height: '35px', marginLeft: '5px' }}
+								/>
+							</IconButton>
+						</Tooltip>
+						<Menu
+							sx={{ mt: '45px' }}
+							id='menu-appbar'
+							anchorEl={anchorElUser}
+							anchorOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							keepMounted
+							transformOrigin={{
+								vertical: 'top',
+								horizontal: 'right',
+							}}
+							open={Boolean(anchorElUser)}
+							onClose={handleCloseUserMenu}>
+							<MenuItem onClick={handleLogout} style={{ padding: '5px 50px' }}>
+								<Typography textAlign='center'>Logout</Typography>
+							</MenuItem>
+						</Menu>
+					</Box>
+				</Toolbar>
+			</Container>
+		</AppBar>
+	);
 };

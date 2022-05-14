@@ -1,13 +1,13 @@
 footer {
-	background-color: var(--otherColor-grey);
-	color: var(--otherColor-white);
-	height: 60px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: static;
-	width: 100%;
-	left: 0px;
-	bottom: 0px;
-	z-index: 100;
+    background-color: var(--otherColor-grey);
+    color: var(--otherColor-white);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: static;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+    z-index: 100;
 }

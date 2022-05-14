@@ -35,5 +35,3 @@ export const readFav = async (uid) => {
 		throw error;
 	}
 };
-
-
