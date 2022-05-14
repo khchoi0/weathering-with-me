@@ -20,6 +20,7 @@ import { CommentSection } from '../UI/CommentSection/CommentSection';
 import Divider from '@mui/material/Divider';
 import Paper from '@mui/material/Paper';
 import CircularProgress from '@mui/material/CircularProgress';
+import Tooltip from '@mui/material/Tooltip';
 
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default;
@@ -60,7 +61,7 @@ export const Main = () => {
 		// Show popup
 		setCurrentLocId(id);
 		// Move to the position of the clicked marker
-		setViewport({ ...viewport, latitude: lat, longitude: long });
+		setViewport({ ...viewport, latitude: lat, longitude: long, zoom: 9 });
 		// Fetch weather data by locaton name
 		const weatherData = await getWeatherDataByLocname(locName);
 		// Store weather details
@@ -145,18 +146,20 @@ export const Main = () => {
 											longitude={locationItem.long}
 											offsetLeft={-3.5 * viewport.zoom}
 											offsetTop={-7 * viewport.zoom}>
-											<Room
-												className='marker-icon'
-												onClick={() =>
-													handleMarker(
-														locationItem._id,
-														locationItem.lat,
-														locationItem.long,
-														locationItem.lname
-													)
-												}
-												style={{ fontSize: viewport.zoom * 7 }}
-											/>
+											<Tooltip title={locationItem.lname} arrow>
+												<Room
+													className='marker-icon'
+													onClick={() =>
+														handleMarker(
+															locationItem._id,
+															locationItem.lat,
+															locationItem.long,
+															locationItem.lname
+														)
+													}
+													style={{ fontSize: viewport.zoom * 7 }}
+												/>
+											</Tooltip>
 										</Marker>
 										{locationItem._id === currentLocId &&
 											((lastUpdatedTime && (

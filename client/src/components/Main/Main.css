@@ -1,6 +1,7 @@
 .marker-icon {
     color: var(--primary-dark);
     cursor: pointer;
+    z-index: 50
 }
 
 .popup-container {
@@ -11,6 +12,7 @@
     flex-direction: column;
     justify-content: space-around;
     min-width: 200px;
+    z-index: 100
 }
 
 .popup-label {
