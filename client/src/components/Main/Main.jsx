@@ -146,7 +146,7 @@ export const Main = () => {
 											longitude={locationItem.long}
 											offsetLeft={-3.5 * viewport.zoom}
 											offsetTop={-7 * viewport.zoom}>
-											{/* <Tooltip title={locationItem.lname} arrow> */}
+											<Tooltip title={locationItem.lname} arrow>
 												<Room
 													className='marker-icon'
 													onClick={() =>
@@ -159,7 +159,7 @@ export const Main = () => {
 													}
 													style={{ fontSize: viewport.zoom * 7 }}
 												/>
-											{/* </Tooltip> */}
+											</Tooltip>
 										</Marker>
 										{locationItem._id === currentLocId &&
 											((lastUpdatedTime && (
