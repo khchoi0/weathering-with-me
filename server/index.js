@@ -49,3 +49,5 @@ app.listen(PORT, async () => {
 		console.log(error);
 	}
 });
+
+app.get('/', (req, res) => { res.send('Hello from Express!') });
