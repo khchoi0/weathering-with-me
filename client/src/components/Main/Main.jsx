@@ -138,7 +138,7 @@ export const Main = () => {
 								{...viewport}
 								mapboxApiAccessToken={MAPBOX}
 								onViewportChange={(nextViewport) => setViewport(nextViewport)}
-								mapStyle='mapbox://styles/safak/cknndpyfq268f17p53nmpwira'>
+								mapStyle='mapbox://styles/mapbox/streets-v11'>
 								{locationData.map((locationItem) => (
 									<Box component='div' key={locationItem._id}>
 										<Marker
