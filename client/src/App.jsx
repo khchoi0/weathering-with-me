@@ -1,6 +1,6 @@
 import { RoutesPath } from './components/RoutesPath/RoutesPath';
 import { useEffect } from 'react';
-import { AxiosInstance } from '../../utils/AxiosInstance';
+import { AxiosInstance } from './utils/AxiosInstance';
 
 const App = () => {
 
