@@ -12,7 +12,7 @@ export const RoutesPath = () => {
 	return (
 		<Router>
 			<Routes>
-				<Route path='/' element={user ? <Main /> : <Login />} />
+				<Route path='/' element={user ? <Main /> : <Navigate to='/login' />} />
 				<Route path='/login' element={user ? <Navigate to='/' /> : <Login />} />
 				<Route path='/register' element={user ? <Navigate to='/' /> : <Register />} />
 				<Route
