@@ -14,6 +14,7 @@ import { useRef, useContext, useState } from 'react';
 import { AuthContext } from '../../../context/AuthContext';
 import { registerCall } from '../../../api/auth';
 import { useForm } from 'react-hook-form';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const Register = () => {
 	// Get input field values
@@ -22,6 +23,7 @@ export const Register = () => {
 	const conPassword = useRef();
 
 	const [userExist, setUserExist] = useState(false);
+	const [signupBtnEle, setSignupBtnEle] = useState('Sign up');
 
 	const { dispatch } = useContext(AuthContext);
 
@@ -33,6 +35,8 @@ export const Register = () => {
 	} = useForm();
 
 	const handleClick = async () => {
+		setSignupBtnEle(<CircularProgress size={25} style={{ color: 'white' }} />);
+
 		const response = await registerCall(
 			{ username: username.current.value, password: password.current.value },
 			dispatch
@@ -40,6 +44,7 @@ export const Register = () => {
 
 		// User exists in database
 		if (response) {
+			setSignupBtnEle('Sign up');
 			setUserExist(true);
 			return;
 		}
@@ -118,7 +123,7 @@ export const Register = () => {
 						helperText={errors?.conPassword ? errors.conPassword.message : null}
 					/>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-						Sign up
+						{signupBtnEle}
 					</Button>
 					<Grid container alignItems='center' justifyContent='center'>
 						<Grid item>

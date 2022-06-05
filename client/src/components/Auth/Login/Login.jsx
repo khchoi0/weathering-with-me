@@ -14,6 +14,7 @@ import { useContext, useRef, useState } from 'react';
 import { loginCall } from '../../../api/auth';
 import { AuthContext } from '../../../context/AuthContext';
 import { useForm } from 'react-hook-form';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export const Login = () => {
 	// Get input field values
@@ -21,6 +22,7 @@ export const Login = () => {
 	const password = useRef();
 
 	const [validationFail, setValidationFail] = useState(false);
+	const [loginBtnEle, setLoginBtnEle] = useState('Sign in');
 
 	const { dispatch } = useContext(AuthContext);
 
@@ -31,6 +33,8 @@ export const Login = () => {
 	} = useForm();
 
 	const handleClick = async () => {
+		setLoginBtnEle(<CircularProgress size={25} style={{ color: 'white' }} />);
+
 		const response = await loginCall(
 			{ username: username.current.value, password: password.current.value },
 			dispatch
@@ -38,6 +42,7 @@ export const Login = () => {
 
 		// Validation fail
 		if (response) {
+			setLoginBtnEle('Sign In');
 			setValidationFail(true);
 			return;
 		}
@@ -89,7 +94,7 @@ export const Login = () => {
 						helperText={errors?.password ? errors.password.message : null}
 					/>
 					<Button type='submit' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
-						Sign In
+						{loginBtnEle}
 					</Button>
 					<Grid container alignItems='center' justifyContent='center'>
 						<Grid item>
