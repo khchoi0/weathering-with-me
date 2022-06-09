@@ -2,6 +2,8 @@
 
 ## MERN Project
 
+### This is a unversity course group project.
+
 - Frontend
 
     - ReactJS + MaterialUI
