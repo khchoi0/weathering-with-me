@@ -2,7 +2,7 @@
 
 ## MERN Project
 
-### This is a unversity course group project.
+### This is a university course group project.
 
 - Frontend
 
